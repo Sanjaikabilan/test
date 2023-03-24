@@ -34,7 +34,8 @@ Problem Statements
                 {% for i in a %}
                 <div style="margin-top:10px" class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="{% url 'state_detail' pk=i.id %}">
                         <div class="d-flex w-100 justify-content-between">
-                            <b class="mb-1">{{i.problem}}</b><span style="background: rgb(133,206,189);border-color: var(--bs-navbar-toggler-border-color);" class="badge rounded-pill bg-primary align-self-center">{{i.domain}}</span>
+                            <b class="mb-1">{{i.problem}}</b>
+                            <span style="background: rgb(133,206,189);border-color: var(--bs-navbar-toggler-border-color);" class="badge text-sm domi rounded-pill align-self-center">{{i.domain}}</span>
                         </div>
                         <p class="mb-1">{{i.description}}</p>
                         <small class="text-muted">{{i.contact}}</small>
@@ -51,3 +52,25 @@ Problem Statements
 </section>
 
 {% endblock content %}
+
+{% block extra_css %}
+    <style>
+        
+        @media (max-width: 768px) {
+            .domi {
+                font-size: small;
+            }
+        }
+
+        @media(min-width: 768px) {
+            .domi {
+                font-size: 12px;
+            }
+        }
+
+
+    </style>
+{% endblock extra_css %}
+
+
+
