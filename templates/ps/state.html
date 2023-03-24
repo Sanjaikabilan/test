@@ -10,19 +10,24 @@ Problem Statements
 
 {% block content %}
 
+{% load bootstrap_tags %}
+
 <section class="py-5">
     <div class="container py-5">
-        <div class="row d-flex justify-content-left">
+        <div class="row d-flex justify-content-center justify-content-lg-left">
             <div class="col-md-6 col-xl-12">
                 <div class="card">
-                    <div class="card-body text-left d-flex flex-column align-items-left">
+                    <div class="card-body text-center text-lg-left d-flex flex-column align-items-center align-items-lg-left">
 
                             <form method="get">
-                                {{myFilter.form}}
-                                <button class="btn " style="text-decoration:  underline;" type="submit">Filter</button>
-                                <a href="{% url 'reset' %}">
-                                    <button class="btn" style="text-decoration:  underline;" type="button">Reset Filter</button>
-                                </a>
+                                <div class="col col-12 align-items-start justify-content-left">
+                                    {{ myFilter.form | as_bootstrap}}
+                                    <button class="btn " style="text-decoration:  underline;" type="submit">Filter</button>
+                                    <a href="{% url 'reset' %}">
+                                        <button class="btn" style="text-decoration:  underline;" type="button">Reset Filter</button>
+                                    </a>
+                                </div>
+                                
                             </form>
 
                     </div>
@@ -35,7 +40,7 @@ Problem Statements
                 <div style="margin-top:10px" class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="{% url 'state_detail' pk=i.id %}">
                         <div class="d-flex w-100 justify-content-between">
                             <b class="mb-1">{{i.problem}}</b>
-                            <span style="background: rgb(133,206,189);border-color: var(--bs-navbar-toggler-border-color);" class="badge text-sm domi rounded-pill align-self-center">{{i.domain}}</span>
+                            <span style="background: rgb(133,206,189);border-color: var(--bs-navbar-toggler-border-color);" class="badge domi rounded-pill align-self-center">{{i.domain}}</span>
                         </div>
                         <p class="mb-1">{{i.description}}</p>
                         <small class="text-muted">{{i.contact}}</small>
@@ -54,22 +59,17 @@ Problem Statements
 {% endblock content %}
 
 {% block extra_css %}
-    <style>
+
+<style>
+    @media screen and (max-width: 992px) {
+        .domi{
+            font-size: x-small !important;
+        }
         
-        @media (max-width: 992px) {
-            .domi {
-                font-size: smaller;
-            }
-        }
+        
+    }
+</style>
 
-        @media(min-width: 768px) {
-            .domi {
-                font-size: smaller;
-            }
-        }
-
-
-    </style>
 {% endblock extra_css %}
 
 

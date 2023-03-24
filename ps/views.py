@@ -19,7 +19,13 @@ def reset(request):
 
 def StateDetail(request, pk):
     a = State.objects.get(id=pk)
-    return render(request,'ps/state_detail.html', {'a':a})
+    contact = a.contact
+    ps = a.problem
+    des = a.description
+    dom = a.domain
+    hard = a.hardness
+    cp = a.contact_person
+    return render(request,'ps/state_detail.html', {'a':a, 'contact':contact, 'ps':ps, 'des':des, 'dom':dom, 'hard':hard, 'cp':cp})
 
 def suc(request):
     return render(request, 'ps/suc.html')

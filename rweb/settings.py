@@ -73,8 +73,9 @@ THIRD_PARTY_APPS = [
     'crispy_forms',
     'bootstrap4',
     'crispy_bootstrap5',
-
     'debug_toolbar',
+    'bootstrap5',
+    'django_forms_bootstrap',
 ]
 
 INSTALLED_APPS += CUSTOM_APPS

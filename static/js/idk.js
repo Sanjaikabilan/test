@@ -2,9 +2,11 @@ $(document).ready(function () {
     $(window).scroll(function () {
       var scroll = $(window).scrollTop();
       if (scroll > 5) {
-        $(".black").css("background", "blue");
+        $(".navbar").css("background", "blue");
+        console.log("scrolling");
       } else {
-        $(".black").css("background", "#333");
+        $(".navbar").css("background", "#333");
+        console.log("not scrolling");
       }
     });
   });
