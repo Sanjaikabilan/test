@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-xkkz4gsdi1^ax*z$qn5jhzfi(29-p65v0!_yoqsra3$j8!wkwq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -217,4 +217,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-CSRF_TRUSTED_ORIGINS = ["https://sanjaikabilan-curly-waddle-7x6q4rp7v972wqwq-8000.preview.app.github.dev",]
+CSRF_TRUSTED_ORIGINS = [
+    "https://sanjaikabilan-curly-waddle-7x6q4rp7v972wqwq-8000.preview.app.github.dev",
+    "rweb-production.up.railway.app"
+    ]
