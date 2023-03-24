@@ -24,5 +24,8 @@ def StateDetail(request, pk):
 def suc(request):
     return render(request, 'ps/suc.html')
 
+def ideasum(request):
+    return render(request, 'ps/sum.html')
+
 
 

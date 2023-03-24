@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 
 # Create your models here.
 
@@ -8,6 +9,7 @@ class Apply(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     contact = models.CharField(max_length=25)
+    
 
     def __str__(self):
         return self.name + ' - ' + self.problem
@@ -26,6 +28,25 @@ class State(models.Model):
 
     def __str__(self):
         return self.problem + ' - ' + self.domain
+
+class Team (models.Model):
+    name = models.CharField( max_length=50 ,validators=[MinLengthValidator(5)])
+
+    def __str__(self):
+        return self.name
+
+class Member(models.Model):
+    name = models.CharField(max_length=50)
+    
+
+
+
+
+
+
+
+
+
 
 
 

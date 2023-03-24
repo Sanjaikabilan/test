@@ -32,7 +32,7 @@ Problem Statements
                 
 
                 {% for i in a %}
-                <div style="margin-top:20px" class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="{% url 'state_detail' pk=i.id %}">
+                <div style="margin-top:10px" class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="{% url 'state_detail' pk=i.id %}">
                         <div class="d-flex w-100 justify-content-between">
                             <b class="mb-1">{{i.problem}}</b><span style="background: rgb(133,206,189);border-color: var(--bs-navbar-toggler-border-color);" class="badge rounded-pill bg-primary align-self-center">{{i.domain}}</span>
                         </div>

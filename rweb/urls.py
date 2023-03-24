@@ -5,6 +5,7 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('allauth.urls')),
+    path("", include("landing.urls")),
     path("research/", include("research.urls")),
     path("ps/", include("ps.urls")),
     
@@ -15,7 +16,7 @@ if settings.DEBUG:
         path('__debug__/', include('debug_toolbar.urls')),
     ] + urlpatterns
 
-"""path("", include("landing.urls")),
+"""
     path("am/", include("am.urls")),
     
     path("startup/", include("startup.urls")),

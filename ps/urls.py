@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.reset, name='reset'),
     path('state/<int:pk>/', views.StateDetail, name='state_detail'),
     path('suc', views.suc, name='suc'),
+    path('sum', views.ideasum, name='sum'),
 ]
