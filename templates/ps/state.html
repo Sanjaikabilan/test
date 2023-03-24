@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+Problem Statements
+
+{% endblock title %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-left">
+            <div class="col-md-6 col-xl-12">
+                <div class="card">
+                    <div class="card-body text-left d-flex flex-column align-items-left">
+
+                            <form method="get">
+                                {{myFilter.form}}
+                                <button class="btn " style="text-decoration:  underline;" type="submit">Filter</button>
+                                <a href="{% url 'reset' %}">
+                                    <button class="btn" style="text-decoration:  underline;" type="button">Reset Filter</button>
+                                </a>
+                            </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+
+                {% for i in a %}
+                <div style="margin-top:20px" class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="{% url 'state_detail' pk=i.id %}">
+                        <div class="d-flex w-100 justify-content-between">
+                            <b class="mb-1">{{i.problem}}</b><span style="background: rgb(133,206,189);border-color: var(--bs-navbar-toggler-border-color);" class="badge rounded-pill bg-primary align-self-center">{{i.domain}}</span>
+                        </div>
+                        <p class="mb-1">{{i.description}}</p>
+                        <small class="text-muted">{{i.contact}}</small>
+                        <br>
+                        <small class="text-muted">{{i.contact_person}}</small>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+{% endblock content %}

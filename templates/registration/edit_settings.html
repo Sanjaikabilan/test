@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Edit Settings | Ré
+{% endblock title %}
+
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        
+        {% if user.id == page_user.id %}
+            <section>
+                <p>Settings:</p>
+                <div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                            <div>
+                                <label for="id_username">Username</label>
+                                <div>
+                                    {{ form.username }}
+                                    <div>
+                                        {% if form.username.errors %}
+                                            {% for error in form.username.errors %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            
+            
+                            <div>
+                                <label for="id_email">Email</label>
+                                <div>
+                                    {{ form.email }}
+                                    <div>
+                                        {% if form.email.errors %}
+                                            {% for error in form.email.errors %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                {% if form.email.errors %}
+                                    {% for error in form.email.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </fieldset>
+
+                        <!-- Add a non-editable password field -->
+                        <fieldset disabled="disabled">
+                            <div>
+                                <label>Password</label>
+                                <div>
+                                    <input type="password" placeholder="Email input" value="{{ user.email }}">
+                                    <div>
+                                        <p>You can change your password using this <a href="{% url 'account_change_password' %}">form</a>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </section>
+
+
+        {% else %}
+        
+            {% include 'users/error_404.html' %}
+        
+        {% endif %}
+
+    {% else %}
+
+        {% include 'users/error_404.html' %}
+
+    {% endif %}
+
+
+{% endblock content %}
+
+
+{% block extra_js %}
+
+{% endblock extra_js %}

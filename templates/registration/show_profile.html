@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Profile | Ré
+{% endblock title %}
+
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+
+{% block content %}
+
+    <section>
+
+        <div>
+
+            <div>
+                <h1>@{{ page_user.user.username }}</h1>
+                <br>
+                <h1>
+                    {{ page_user.firstname }} {{ page_user.lastname }}
+                    {% if user.id == page_user.user.id %}
+                        <a href="{% url 'edit_profile_page' user.username %}">
+                            <i class="fas fa-pencil-alt"></i>
+                            <span> &nbsp;Edit</span>
+                        </a>
+                    {% endif %}
+                </h1>
+                <br/>
+
+            </div>
+
+        </div>
+        
+        <div>
+            <h1>
+                Other details
+            </h1>
+            <div>
+                <div>Gender</div>
+                <div>&nbsp;-</div>
+                <div>{{ page_user.gender }}</div>
+            </div>
+            <div>
+                <div>D.O.B</div>
+                <div>&nbsp;-</div>
+                
+                {% if page_user.dob %}                    
+                    <div class="column is-7">{{ page_user.dob }}</div>
+                {% else %}
+                    <div class="column is-7">Rather not say</div>
+                {% endif %}
+                    
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock content %}
+
+
+{% block extra_js %}
+    
+{% endblock extra_js %}

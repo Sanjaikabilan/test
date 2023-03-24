@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Edit Profile | Ré
+{% endblock title %}
+
+
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        
+        {% if user.id == profile.user.id %}
+                <form method="post">
+                    {% csrf_token %}
+                                <h2>Personal Info</h2>
+                                <div>
+                                    <label>Your name</label>
+                                    <div>
+                                        {{ form.firstname }}
+                                    </div>
+                                    <div>
+                                        {{ form.lastname }}
+                                    </div>
+                                </div>
+                                <fieldset disabled>
+                                    <div>
+                                        <label>Username</label>
+                                        <div>
+                                        <input type="text" placeholder="Text input" value="{{ user.username }}">
+                                        </div>
+                                    </div>
+                    
+                                    <div>
+                                        <label class="label">Email</label>
+                                        <div>
+                                            <input type="email" placeholder="Email input" value="{{ user.email }}">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <br>
+
+                        <div>
+                            <div>
+                                <h2>Other Details</h2>
+
+                                <div>
+                                    <label>Gender</label>
+                                    <div>
+                                        <div>
+                                            {{ form.gender }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label>Date of birth</label>
+                                        <div>
+                                            {{ form.dob }}
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <p> {{ errors }} </p>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <p> {{ error }} </p>
+                            {% endfor %}
+                        {% endif %}
+                        <div>
+                            <div>
+                                <button>Submit</button>
+                            </div>
+                            
+                            {% if user.profile.firstname %}
+                                <div>
+                                    <a href="{% url 'show_profile_page' user.profile.slug %}">
+                                        <button>Go to Profile</button>
+                                    </a>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                </form>
+
+        {% else %}
+        
+            {% include 'users/error_404.html' %}
+        
+        {% endif %}
+
+    {% else %}
+
+        {% include 'users/error_404.html' %}
+
+    {% endif %}
+
+        
+{% endblock content %}
+
+
+{% block extra_js %}
+
+{% endblock extra_js %}

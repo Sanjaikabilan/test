@@ -1,0 +1,8 @@
+{% load static %}
+{% for message in messages %}
+  <div class="alert alert-{{message.tags}}" role="alert" >
+      <span aria-hidden="True"></span>
+    </button>
+    {{ message }}
+  </div>
+{% endfor %}
