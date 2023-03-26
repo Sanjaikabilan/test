@@ -49,16 +49,16 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link {% block isResearchActive %}{% endblock isResearchActive %}
                         " href="{% url 'research-home' %}">Résearch</a></li>
-                    <li class="nav-item"><a class="nav-link {% block isStartupActive %}{% endblock isStartupActive %}" href="#">Startups</a></li>
+                    {% comment %} <li class="nav-item"><a class="nav-link {% block isStartupActive %}{% endblock isStartupActive %}" href="#">Startups</a></li> {% endcomment %}
                     <li class="nav-item"><a class="nav-link {% block isAmActive %}{% endblock isAmActive %}" href="{% url 'statements' %}">Ideathon</a></li>
                     <li class="nav-item"><a class="nav-link {% block isContactActive %}{% endblock isContactActive %}" href="#">Contact</a></li>
                 </ul>
                 {% if user.is_authenticated %}
-                    <a class="btn btn-primary shadow" role="button" href="#" style="background: rgb(133,206,189);border-color: var(--bs-navbar-toggler-border-color);">
+                    <a class="btn btn shadow" role="button" href="#" style="background: rgb(133,206,189);">
                         Log out
                     </a>
                 {% else %}
-                    <a class="btn btn-primary shadow" role="button" href="#" style="background: rgb(133,206,189);border-color: var(--bs-navbar-toggler-border-color);">
+                    <a class="btn btn shadow" role="button" href="#" style="background: rgb(133,206,189);">
                         Log in
                     </a>
                 {% endif %}
@@ -82,14 +82,14 @@
                         <li><a href="#">Hosting</a></li> {% endcomment %}
                     </ul>
                 </div>
-                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
+                {% comment %} <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
                     <h3 class="fs-6 fw-bold">Startups</h3>
                     <ul class="list-unstyled">
                         <li><a href="#">Teams</a></li>
-                        {% comment %} <li><a href="#">Team</a></li>
-                        <li><a href="#">Legacy</a></li> {% endcomment %}
+                         <li><a href="#">Team</a></li>
+                        <li><a href="#">Legacy</a></li>
                     </ul>
-                </div>
+                </div> {% endcomment %}
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
                     <h3 class="fs-6 fw-bold">A&M</h3>
                     <ul class="list-unstyled">

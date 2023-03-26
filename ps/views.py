@@ -1,8 +1,24 @@
 from django.shortcuts import render, redirect
-from . models import Apply, State, Team, Participants
+from . models import Apply, State, Team, Participants, OwnState, OwnTeam, OwnParticipants
 from . filters import StateFilter
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.http import FileResponse
+from django.views.decorators.csrf import csrf_exempt
+import os
+from django.http import HttpResponse
+
+
+@csrf_exempt
+def download(request):
+    file_path = 'static/img/blob.svg'
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="image/svg+xml")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
+
 
 # Create your views here.
 
@@ -83,8 +99,6 @@ def StateDetail(request, pk):
 def suc(request):
     return render(request, 'ps/suc.html')
 
-def ideasum(request):
-    return render(request, 'ps/sum.html')
 
 def usermodtest(request):
     leaders = Team.objects.all()
@@ -197,5 +211,31 @@ def teamtest(request, this_id):
         'this_id':this_id,
         'problem':problem,
         'members':members,})
+
+
+
+def ideasum(request):
+    if request.method == 'POST':
+        problem = request.POST['problem']
+        domain = request.POST['domain']
+        description = request.POST['description']
+
+        if len(problem) < 8:
+            messages.warning(request, 'Problem statement should be atleast 5 characters')
+            return redirect('ideasum')
+        
+        if len(description) < 50:
+            messages.warning(request, 'Description should be atleast 50 characters')
+            return redirect('ideasum')
+        
+        sub = OwnState(problem=problem, domain=domain, description=description)
+        
+        if sub is not None:
+            sub.save()
+            messages.success(request, 'Your idea has been submitted successfully')
+            return redirect('sum')
+
+
+    return render(request, 'ps/sum.html')
 
 

@@ -9,5 +9,6 @@ urlpatterns = [
     path('suc', views.suc, name='suc'),
     path('sum', views.ideasum, name='sum'),
     path('usermodtest', views.usermodtest, name='usermodtest'),
-    path('teamtest/<int:this_id>/', views.teamtest, name='teamtest')
+    path('teamtest/<int:this_id>/', views.teamtest, name='teamtest'),
+    path('download', views.download, name='download')
 ]
