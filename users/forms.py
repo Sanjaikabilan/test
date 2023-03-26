@@ -6,7 +6,6 @@ class EditProfilePageForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = (
-            'user',
             'firstname',
             'lastname',
             'gender',
@@ -24,7 +23,7 @@ class EditProfilePageForm(forms.ModelForm):
                     'placeholder': 'Last Name'
                 }
             ),
-            'dob': forms.DateInput(
+            'date_of_birth': forms.DateInput(
                 attrs={
                     'type': 'date',
                     'id': 'dob'

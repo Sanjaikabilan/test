@@ -47,19 +47,26 @@
                     </button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link {% block isResearchActive %}{% endblock isResearchActive %}
-                        " href="{% url 'research-home' %}">Résearch</a></li>
-                    {% comment %} <li class="nav-item"><a class="nav-link {% block isStartupActive %}{% endblock isStartupActive %}" href="#">Startups</a></li> {% endcomment %}
-                    <li class="nav-item"><a class="nav-link {% block isAmActive %}{% endblock isAmActive %}" href="{% url 'statements' %}">Ideathon</a></li>
-                    <li class="nav-item"><a class="nav-link {% block isContactActive %}{% endblock isContactActive %}" href="#">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link {% if 'research' in request.get_full_path %}active{% endif %}" href="{% url 'research:research-home' %}">Résearch</a></li>
+                    <li class="nav-item"><a class="nav-link {% if 'am' in request.get_full_path %}active{% endif %}" href="{% url 'am:am-home' %}">A&amp;M</a></li>
+                    <li class="nav-item"><a class="nav-link {% if 'contact' in request.get_full_path %}active{% endif %}" href="{% url 'contact' %}">Contact</a></li>
                 </ul>
-                {% if user.is_authenticated %}
-                    <a class="btn btn shadow" role="button" href="{% url 'account_logout' %}" style="background: rgb(133,206,189);">
+                % if user.is_authenticated %}
+                    <a class="btn btn-primary shadow" style="background-color: rgb(133,206,189) !important;border-color: rgb(133,206,189)" role="button" href="{% url 'account_logout' %}" style="background: rgb(133,206,189);">
                         Log out
                     </a>
                 {% else %}
-                    <a class="btn btn shadow" role="button" href="{% url 'account_login' %}" style="background: rgb(133,206,189);">
+                    <a class="btn btn-primary shadow" style="background-color: rgb(133,206,189) !important;border-color: rgb(133,206,189)" role="button" href="
+                    {% if 'login' not in request.get_full_path %}
+                        {% url 'account_login' %}
+                    {% else %}
+                        {% url 'account_signup' %}
+                    {% endif %}" style="background: rgb(133,206,189);">
+                    {% if 'login' not in request.get_full_path %}
                         Log in
+                    {% else %}
+                        Sign up
+                    {% endif %}
                     </a>
                 {% endif %}
             </div>

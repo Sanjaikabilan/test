@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if event %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Are you sure you want to delete the event: {{ event.name }}?</h1>
+            <form action="{% url 'am:event-delete' event.slug %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Yes" class="btn btn-danger">
+                <a style="color:rgba(133,206,189,255)" href="{% url 'am:event-list' %}" class="btn">No</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

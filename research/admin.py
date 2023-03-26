@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import researchproject
+from .models import ResearchProject
 
-admin.site.register(researchproject)
+admin.site.register(ResearchProject)

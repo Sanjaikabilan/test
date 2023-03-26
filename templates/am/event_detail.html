@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .badge-completed {
+        background-color: #28a745 !important;
+        color: white;
+    }
+    .badge-progress {
+        background-color: #007bff !important;
+        color: white;
+    }
+    .btn-sm {
+        transform: scale(0.8);
+    }
+    .btn.btn-primary {
+        display: inline-flex;
+        background-color: rgba(133,206,189,255);
+        border-color: rgba(133,206,189,255);
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{% url 'am:event-list' %}" class="btn btn-sm btn-primary"><span class="material-symbols-outlined">arrow_back</span></a>
+                <h1>
+                    <b>Event Detail</b>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'am:event-update' event.slug %}" class="btn btn-sm btn-primary"><span class="material-symbols-outlined">edit</span></a>
+                        <a href="{% url 'am:event-delete' event.slug %}" class="btn btn-sm btn-primary"><span class="material-symbols-outlined">remove</span></a>
+                    {% endif %}
+                </h1>
+                <p><b>Name:</b> {{ event.name }}</p> 
+                <p><b>Event Cover Image:</b><img src="{{ event.cover_picture.url }}" alt="cover" class="img-fluid"></p> 
+                <p><b>Event Poster:</b><img src="{{ event.poster.url }}" alt="cover" class="img-fluid"></p> 
+                <p><b>Description:</b> {{ event.description | safe }}</p>
+                <p><b>Short Description:</b> {{ event.short_description | safe }}</p>
+                <p><b>Event Overall Coordinator:</b> {{ event.overall_coordinator.profile.firstname }} {{ event.overall_coordinator.profile.lastname }}</p>
+                <p><b>Event Date and Time:</b> {{ event.start_date }} : {{ event.start_time }} - {{ event.end_date }} : {{ event.end_time }}</p>
+                <p><b>Event Venue:</b>{{ event.venue }}</p> 
+                <p><b>Collaborator(s):</b>
+                    {% if event.is_this_a_colab %}
+                        {{ event.colab_with }}
+                    {% else %}
+                        None
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

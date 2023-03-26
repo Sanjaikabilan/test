@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .badge-completed {
+        background-color: #28a745 !important;
+        color: white;
+    }
+    .badge-progress {
+        background-color: #007bff !important;
+        color: white;
+    }
+    .btn-sm {
+        transform: scale(0.8);
+    }
+    .btn.btn-primary {
+        display: inline-flex;
+        background-color: rgba(133,206,189,255);
+        border-color: rgba(133,206,189,255);
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% comment %} Make a go back to project list block {% endcomment %}
+                <a href="{% url 'research:project-list' %}" class="btn btn-sm btn-primary"><span class="material-symbols-outlined">arrow_back</span></a>
+                {% comment %} Make a go back to project list block {% endcomment %}
+                <h1>
+                    <b>Project Detail</b>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'research:project-update' project.pk %}" class="btn btn-sm btn-primary"><span class="material-symbols-outlined">edit</span></a>
+                        <a href="{% url 'research:project-delete' project.pk %}" class="btn btn-sm btn-primary"><span class="material-symbols-outlined">remove</span></a>
+                    {% endif %}
+                </h1>
+                <p><b>Name:</b> {{ project.name }}</p> 
+                <p><b>Project Domain:</b> {{ project.domain }}</p>
+                <p><b>Description:</b> {{ project.description | safe }}</p>
+                <p><b>Project Incharge:</b> {{ project.incharge.profile.firstname }} {{ project.incharge.profile.lastname }}</p>
+                <p><b>Project Status:</b> 
+                {% if project.status == 'Completed' %}
+                    <span class="badge badge-completed">{{ project.status }}</span>
+                {% else %}
+                    <span class="badge badge-progress">{{ project.status }}</span>
+                {% endif %}
+                </p>
+                {% comment %} Show the cover image {% endcomment %}
+                <img src="{{ project.project_cover_picture.url }}" alt="cover" class="img-fluid">
+                {% comment %} Show the cover image {% endcomment %}
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

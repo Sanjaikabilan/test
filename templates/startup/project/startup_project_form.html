@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'research/css/researchproject_form.css' %}">
+<link rel="stylesheet" href="{% static 'research/css/common.css' %}">
+
+<style>
+    .editor {
+        overflow: auto;
+    }
+    .asteriskField {
+        display: none;
+    }
+    .submitBtn {
+        width: fit-content !important;
+        margin: 1rem 0;
+    }
+    .form-control:focus {
+        border-color: rgba(133,206,189,255);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(133,206,189,255);
+    }
+    .form-group {
+        margin: 1rem 0;
+    }
+    .form-group label {
+        margin: 0.3rem 0;
+    }
+    .form-check {
+        display: flex;
+        align-items: center;
+    }
+    label.form-check-label {
+        margin-left: 0.5rem !important;
+    }
+    .form-label {
+        display: block !important;
+    }
+    @media screen and (max-width:768px) {
+        form {
+            width: 100%;
+        }
+    }
+    @media screen and (min-width:768px) {
+        form{
+            width:75%;
+        }
+    }
+    .btn-sm {
+        transform: scale(0.8);
+    }
+    .btn.btn-primary {
+        display: inline-flex;
+        background-color: rgba(133,206,189,255);
+        border-color: rgba(133,206,189,255);
+    }
+    input[type="file"] {
+        width: 100%;
+    }
+</style>
+{% endblock extra_css %}
+    
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 formClass">
+                <a href="{% url 'startup:project-team-list' %}" class="btn btn-sm btn-primary"><span class="material-symbols-outlined">arrow_back</span></a>
+
+                <h1>
+                    {% if 'new' in request.get_full_path %}
+                        Add a Startup
+                    {% else %}
+                        Edit
+                    {% endif %} Project
+                </h1>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-11 col-md-5">
+                            {{ form.name | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="editor">
+                        {{form.description | as_crispy_field}}
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-11 col-md-5">
+                            {{ form.team | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-11 col-md-5">
+                            {{ form.incharge | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-11 col-md-5">
+                            {{ form.status | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-11 col-md-5">
+                            {{ form.domain | as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-11 col-md-5">
+                            {{ form.project_cover_picture | as_crispy_field }}
+                        </div>
+                    </div>
+                    {{ form.media }}
+                    <button style="background-color: rgba(133,206,189,255); color: white; margin-top: 16px;" class="btn shadow d-block w-100 submitBtn" value="Submit" type="submit">Submit </button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock extra_js %}
