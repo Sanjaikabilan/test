@@ -60,16 +60,15 @@
                         Log out
                     </a>
                 {% else %}
-                    <a class="btn btn-primary shadow" style="background-color: rgb(133,206,189) !important;border-color: rgb(133,206,189)" role="button" href="
+                    
                     {% if 'login' not in request.get_full_path %}
-                        {% url 'account_login' %}
-                    {% else %}
-                        {% url 'account_signup' %}
-                    {% endif %}" style="background: rgb(133,206,189);">
+                    <a class="btn btn-primary shadow" style="background-color: rgb(133,206,189) !important;border-color: rgb(133,206,189)" role="button" href="
+                        {% url 'account_login' %}">
+
+                    {% endif %}
                     {% if 'login' not in request.get_full_path %}
                         Log in
-                    {% else %}
-                        Sign up
+                   
                     {% endif %}
                     </a>
                 {% endif %}

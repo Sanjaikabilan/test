@@ -12,15 +12,13 @@ Register you team
         <div class="row d-flex justify-content-center">
             <div class="col-md-6 col-xl-10">
                 <div>
-                    {% if messages %}
-                {%else%}
+
                 <p class="fw-bold mb-2" style="color:rgba(30,41,67,255);text-align: justify;">Problem Statement : {{ps.problem}}</p>
                 <h2 class="fw-normal" style="text-align: left;">{{ state.problem }}</h2>
                 <p class="fw-normal mb-2" style="color:rgba(30,41,67,255);text-align: justify;">Domain : {{ps.domain}} <span class="fw" style="color:rgba(133,206,189,255);">{{ state.domain }}</span></p>
                 {% comment %} <p class="fw-normal mb-2" style="color:rgba(30,41,67,255);text-align: justify;">Difficulty level : {{hard}} <span class="fw" style="color:rgba(133,206,189,255);">{{ state.hardness }}</span></p> {% endcomment %}
                 <p class="fw-normal mb-2" style="color:rgba(30,41,67,255);text-align: justify;">{{ ps.description }}</p>
 
-                {% endif %}
                 </div>
             </div>
             <div class="col-md-6 col-xl-4">
