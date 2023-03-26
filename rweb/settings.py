@@ -250,7 +250,8 @@ ACCOUNT_LOGOUT_ON_GET = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CSRF_TRUSTED_ORIGINS = [
     "https://sanjaikabilan-curly-waddle-7x6q4rp7v972wqwq-8000.preview.app.github.dev",
-    "https://rweb-production.up.railway.app"
+    "https://rweb-production.up.railway.app",
+    "https://rweb-production-d00e.up.railway.app"
     ]
 
 MESSAGE_TAGS = {
