@@ -41,7 +41,7 @@ env.read_env(os.path.join(BASE_DIR,'.env'))
 SECRET_KEY = "django-insecure-xkkz4gsdi1^ax*z$qn5jhzfi(29-p65v0!_yoqsra3$j8!wkwq"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -115,12 +115,14 @@ DEBUG_TOOLBAR_PANELS = [
 ]
 
 def show_toolbar(request):
-    return True
+    return False
     
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
     'SHOW_TOOLBAR_CALLBACK': show_toolbar
 }
+
+
 
 ROOT_URLCONF = "rweb.urls"
 
@@ -251,7 +253,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CSRF_TRUSTED_ORIGINS = [
     "https://sanjaikabilan-curly-waddle-7x6q4rp7v972wqwq-8000.preview.app.github.dev",
     "https://rweb-production.up.railway.app",
-    "https://rweb-production-d00e.up.railway.app"
+    "https://rweb-production-d00e.up.railway.app",
+    "https://sanjaikabilan-stunning-yodel-rxq9vrp4jrw2554x-8000.preview.app.github.dev",
     ]
 
 MESSAGE_TAGS = {

@@ -45,7 +45,7 @@ class ContactForm(forms.Form):
             f'Contact Form - {name} - {email}',
             message,
             settings.EMAIL_HOST_USER,
-            ['vijayanand2k20@gmail.com'],
+            ['noreply.researchcell@gmail.com'],
             fail_silently=False,
         )
         
