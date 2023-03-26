@@ -21,7 +21,6 @@ class ResearchHomeView(ListView):
     model = ResearchProject
     template_name = 'research/research.html'
     context_object_name = 'projects'
-    paginate_by = 5
 
 class ResearchDetailView(DetailView):
     model = ResearchProject

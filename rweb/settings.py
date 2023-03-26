@@ -78,7 +78,6 @@ THIRD_PARTY_APPS = [
     #'debug_toolbar',
     'bootstrap5',
     'django_forms_bootstrap',
-    'django_downloadview',
 ]
 
 INSTALLED_APPS += CUSTOM_APPS
