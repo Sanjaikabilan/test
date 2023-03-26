@@ -29,14 +29,58 @@ class State(models.Model):
     def __str__(self):
         return self.problem + ' - ' + self.domain
 
-class Team (models.Model):
-    name = models.CharField( max_length=50 ,validators=[MinLengthValidator(5)])
+class OwnState(models.Model):
+    problem = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1000)
+    domain = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.name
+        return self.problem + ' - ' + self.domain
 
-class Member(models.Model):
+class OwnTeam(models.Model):
+    team_name = models.CharField(max_length=50, unique=True, validators=[MinLengthValidator(5)])
+    leader_name = models.CharField(max_length=50)
+    leader_email = models.CharField(max_length=50, unique=True)
+    leader_contact = models.CharField(max_length=25, unique=True)
+    leader_rollno = models.CharField(max_length=25, unique=True)
+    ps = models.ForeignKey(OwnState, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.team_name + ' - ' + self.leader_name
+
+class OwnParticipants(models.Model):
     name = models.CharField(max_length=50)
+    email = models.CharField(max_length=50, unique=True)
+    contact = models.CharField(max_length=25, unique=True)
+    rollno = models.CharField(max_length=25, unique=True)
+    team = models.ForeignKey(OwnTeam, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name + ' - ' + self.team.team_name
+
+class Team(models.Model):
+    team_name = models.CharField(max_length=50, unique=True, validators=[MinLengthValidator(5)])
+    leader_name = models.CharField(max_length=50)
+    leader_email = models.CharField(max_length=50, unique=True)
+    leader_contact = models.CharField(max_length=25, unique=True)
+    leader_rollno = models.CharField(max_length=25, unique=True)
+    ps = models.ForeignKey(State, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.team_name + ' - ' + self.leader_name
+
+
+class Participants(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=50, unique=True)
+    contact = models.CharField(max_length=25, unique=True)
+    rollno = models.CharField(max_length=25, unique=True)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name + ' - ' + self.team.team_name
+
+
     
 
 

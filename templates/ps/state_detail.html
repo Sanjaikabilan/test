@@ -11,41 +11,39 @@ Thanks
 
 <section data-bs-scroll="true" class="py-5">
     <div class="container py-5">
-        <div class="row mb-5">
-            <div class="col-md-8 col-xl-6 text-left mx-auto">                    
-                {% if messages %}
-                {% include 'includes/messages.html'  %}
-                {%else%}
-                <p class="fw-bold mb-2" style="color:rgba(30,41,67,255);text-align: justify;">Problem Statement:{{ps}}</p>
-                <h2 class="fw-bold" style="text-align: left;">{{ state.problem }}</h2>
-                <p class="fw-bold mb-2" style="color:rgba(30,41,67,255);text-align: justify;">Domain:{{dom}} <span style="color:rgba(133,206,189,255);">{{ state.domain }}</span></p>
-                <p class="fw-bold mb-2" style="color:rgba(30,41,67,255);text-align: justify;">Difficulty level:{{hard}} <span style="color:rgba(133,206,189,255);">{{ state.hardness }}</span></p>
-                <p class="fw-bold mb-2" style="color:rgba(30,41,67,255);text-align: justify;">{{ des }}</p>
-
-                {% endif %}
-                
-            </div>
-        </div>
         <div class="row d-flex justify-content-center">
             <div class="col-md-6 col-xl-4">
                 <div>
-                    <form class="p-3 p-xl-4"  method="post">
+                    {% if messages %}
+                {%else%}
+                <p class="fw-bold mb-2" style="color:rgba(30,41,67,255);text-align: justify;">Problem Statement : {{ps}}</p>
+                <h2 class="fw-normal" style="text-align: left;">{{ state.problem }}</h2>
+                <p class="fw-normal mb-2" style="color:rgba(30,41,67,255);text-align: justify;">Domain : {{dom}} <span class="fw" style="color:rgba(133,206,189,255);">{{ state.domain }}</span></p>
+                <p class="fw-normal mb-2" style="color:rgba(30,41,67,255);text-align: justify;">Difficulty level : {{hard}} <span class="fw" style="color:rgba(133,206,189,255);">{{ state.hardness }}</span></p>
+                <p class="fw-normal mb-2" style="color:rgba(30,41,67,255);text-align: justify;">{{ des }}</p>
+
+                {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                
+            </div>
+        </div>
+
+        <div style="margin-top:30px" class="row d-flex justify-content-center">
+            <div class="col-md-6 col-xl-4">
+                <div>
+                    <form method="post">
                         {% csrf_token %}
-                        <div class="mb-3">
-                            <input class="form-control" type="text"  name="name" placeholder="Name" style="margin-top: 16px;" required>
-                            <input class="form-control" type="email"  name="email" placeholder="Email" style="margin-top: 16px;" required>
-                            <input class="form-control" type="text" name="contact" placeholder="Contact" style="margin-top: 16px;" required>
-                             <!-- <button style="background-color: rgba(133,206,189,255); color: white; margin-top: 16px;" class="btn shadow d-block w-100" type="submit">Apply</button> -->
-                        </div>
-                        <div class="mb-3">
-                            <button style="color: white; margin-top: 16px;" class="learn-more">
-                                <span class="circle" aria-hidden="true">
-                                <span class="icon arrow"></span>
-                                </span>
-                                <span class="button-text" style = "color:rgba(30,41,67,255);">Apply Now</span>
-                              </button>
-                        </div>
+                        <div class="mb-3"><input class="form-control text-center" type="text" name="team_name" placeholder="Team Name" required /></div>
+                        <div class="mb-3"><input class="form-control text-center" type="text" name="team_leader_name" placeholder="Team Leader Name" required /></div>
+                        <div class="mb-3"><input class="form-control text-center" type="email" name="team_leader_email" placeholder="Team Leader Email" required /></div>
+                        <div class="mb-3"><input class="form-control text-center" type="tel" name="team_leader_contact" placeholder="Team Leader Phone" required /></div>
+                        <div class="mb-3"><input class="form-control text-center" type="text" name="team_leader_regno" placeholder="Register Number" required /></div>
+                        <div class="mb-3"><button style="color:#85cebd; border-color:#85cebd ;" class="btn shadow d-block w-100" type="submit">Register</button></div>
                     </form>
+
+                    {% include 'includes/messages.html' %}
                     
                 </div>
             </div>

@@ -1,8 +1,11 @@
 {% load static %}
 {% for message in messages %}
-  <div class="alert alert-{{message.tags}}" role="alert" >
-      <span aria-hidden="True"></span>
+<div class="container-fluid p-0">
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" >
+    <button class="btn" type="button" class="close" data-dismiss="alert"  aria-label="Close" onclick="closeShit()" >
+      <span aria-hidden="true">&times;</span>
     </button>
     {{ message }}
   </div>
+</div>
 {% endfor %}
