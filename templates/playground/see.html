@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+test display rand
+{% endblock title %}
+
+{% block content %}
+{% if team %}
+
+{{ team.name }}
+{{ team.email }}
+{{ team.contact}}
+
+{% endif %}
+
+
+{% endblock content %}

@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
+import random
+import string
 
 # Create your models here.
 
@@ -44,6 +46,13 @@ class OwnTeam(models.Model):
     leader_contact = models.CharField(max_length=25, unique=True)
     leader_rollno = models.CharField(max_length=25, unique=True)
     ps = models.ForeignKey(OwnState, on_delete=models.CASCADE)
+    hashid = models.CharField(max_length=14, unique=True, primary_key=False)
+
+    def save(self, *args, **kwargs):
+        if not self.hashid:
+            # generate a random 8 character string for hashid
+            self.hashid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=14))
+        super().save(*args, **kwargs) 
 
     def __str__(self):
         return self.team_name + ' - ' + self.leader_name
@@ -65,12 +74,20 @@ class Team(models.Model):
     leader_contact = models.CharField(max_length=25, unique=True)
     leader_rollno = models.CharField(max_length=25, unique=True)
     ps = models.ForeignKey(State, on_delete=models.CASCADE)
+    hashid = models.CharField(max_length=14, unique=True, primary_key=False)
+
+    def save(self, *args, **kwargs):
+        if not self.hashid:
+            # generate a random 8 character string for hashid
+            self.hashid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=14))
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.team_name + ' - ' + self.leader_name
 
 
 class Participants(models.Model):
+
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=50, unique=True)
     contact = models.CharField(max_length=25, unique=True)

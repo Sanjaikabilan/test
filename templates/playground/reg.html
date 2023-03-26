@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Rand test
+{% endblock title %}
+
+{% block content %}
+<section>
+    <div class="container">
+
+        <div class="row py-5 d-flex justify-content-center">
+            <div class="col-6 d-flex justify-content-center">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="name" placeholder="Team name">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="email" name="email" placeholder="Team leader email">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control" type="tel" name="phone" placeholder="Team leader phone">
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    
+</section>
+{% endblock content %}
+

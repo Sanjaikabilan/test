@@ -17,6 +17,7 @@ from pathlib import Path
 import os
 import dj_database_url
 import environ
+from django.contrib.messages import constants as messages
 
 
 
@@ -40,7 +41,7 @@ env.read_env(os.path.join(BASE_DIR,'.env'))
 SECRET_KEY = "django-insecure-xkkz4gsdi1^ax*z$qn5jhzfi(29-p65v0!_yoqsra3$j8!wkwq"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -63,6 +64,7 @@ CUSTOM_APPS = [
     'startup',
     'am',
     'ps',
+    'playground',
 ]
 
 THIRD_PARTY_APPS = [
@@ -73,7 +75,7 @@ THIRD_PARTY_APPS = [
     'crispy_forms',
     'bootstrap4',
     'crispy_bootstrap5',
-    'debug_toolbar',
+    #'debug_toolbar',
     'bootstrap5',
     'django_forms_bootstrap',
     'django_downloadview',
@@ -93,7 +95,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 DEBUG_TOOLBAR_PANELS = [
@@ -140,10 +142,10 @@ TEMPLATES = [
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.office365.com"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "godsgrace2608@gmail.com"
+EMAIL_HOST_USER = "noreply.researchcell@gmail.com"
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -165,6 +167,16 @@ WSGI_APPLICATION = "rweb.wsgi.application"
 DATABASES = {
     "default": dj_database_url.parse(env('DATABASE_URL'))
 }
+# sqlite database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# set a backup database in case the primary database fails
+# DATABASES['backup'] = dj_database_url.parse(env('DATABASE_URL'))
 
 
 
@@ -241,3 +253,11 @@ CSRF_TRUSTED_ORIGINS = [
     "https://sanjaikabilan-curly-waddle-7x6q4rp7v972wqwq-8000.preview.app.github.dev",
     "https://rweb-production.up.railway.app"
     ]
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

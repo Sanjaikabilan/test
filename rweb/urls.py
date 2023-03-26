@@ -9,6 +9,7 @@ urlpatterns = [
     path("", include("landing.urls")),
     path("research/", include("research.urls")),
     path("ps/", include("ps.urls")),
+    path("playground/", include("playground.urls")),
     
 ]
 

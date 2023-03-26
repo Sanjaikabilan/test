@@ -54,11 +54,11 @@
                     <li class="nav-item"><a class="nav-link {% block isContactActive %}{% endblock isContactActive %}" href="#">Contact</a></li>
                 </ul>
                 {% if user.is_authenticated %}
-                    <a class="btn btn shadow" role="button" href="#" style="background: rgb(133,206,189);">
+                    <a class="btn btn shadow" role="button" href="{% url 'account_logout' %}" style="background: rgb(133,206,189);">
                         Log out
                     </a>
                 {% else %}
-                    <a class="btn btn shadow" role="button" href="#" style="background: rgb(133,206,189);">
+                    <a class="btn btn shadow" role="button" href="{% url 'account_login' %}" style="background: rgb(133,206,189);">
                         Log in
                     </a>
                 {% endif %}
