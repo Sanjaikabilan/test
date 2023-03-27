@@ -24,9 +24,10 @@
         </div>
         <div class="row">
             <div class="col col-sm-12 col-md-6">
-                <div><span class="badge bg-primary" style="margin-right: 8px;background-color: rgb(133,206,189) !important;">{{ project.domain }}</span><span class="badge bg-success">{{ project.status }}</span></div>
+                <div><span class="badge bg-primary" style="margin-right: 8px;margin-top: 8px ;background-color: rgb(133,206,189) !important;">{{ project.domain }}</span>
+                    <span class="badge bg-success" style="margin-top:8px" >{{ project.status }}</span></div>
                 <div style="margin-top: 13px;margin-left: 2px;"><strong>Incharge</strong>
-                    <p>{{ project.incharge.profile.firstname }} {{ project.incharge.profile.lastname }}</p>
+                    <p>{{ project.incharge.profile.firstname }} {% if project.incharge.profile.lastname %}{{ project.incharge.profile.lastname }}{% endif %}</p>
                 </div>
             </div>
             <div class="col"></div>

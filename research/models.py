@@ -11,7 +11,7 @@ class ResearchProject(models.Model):
 
     name = models.CharField(max_length=100)
     description = RichTextField()
-    short_description = RichTextField(max_length=200, default="")
+    short_description = RichTextField(max_length=400, default="")
     incharge = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='In Progress')
     domain = models.CharField(max_length=100)
