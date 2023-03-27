@@ -3,6 +3,8 @@ from . models import Apply, State, Team, Participants, OwnState, OwnTeam, OwnPar
 from . filters import StateFilter
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.conf import settings
 from django.http import FileResponse
 from django.views.decorators.csrf import csrf_exempt
 import os
@@ -11,6 +13,7 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404
 import random
 from django.db import IntegrityError
+
 
 
 @csrf_exempt
@@ -50,9 +53,7 @@ def StateDetail(request, pk):
 
     leaders = Team.objects.all()
 
-    for leader in leaders:
-        #print(leader.leader_contact)
-        pass
+    
 
     if request.method == 'POST':
         team_name = request.POST['team_name']
@@ -88,39 +89,63 @@ def StateDetail(request, pk):
                 messages.warning(request, 'Please enter a valid registration number')
                 return redirect('state_detail', pk=pk)
 
-        
+        for leader in leaders:
 
-        if team_name in leader.team_name:
-            messages.warning(request, 'This team name is already registered')
-            return redirect('state_detail', pk=pk)
+            if team_name in leader.team_name:
+                messages.warning(request, 'This team name is already registered')
+                return redirect('state_detail', pk=pk)
 
-        if team_leader_regno in leader.leader_rollno:
-            messages.warning(request, 'This roll number is already registered as a team leader')
-            return redirect('state_detail' , pk=pk)
-        
-        if team_leader_email in leader.leader_email:
-            messages.warning(request, 'This email is already registered as a team leader')
-            return redirect('state_detail', pk=pk)
-        
-        if team_leader_contact in leader.leader_contact:
-            messages.warning(request, 'This contact number is already registered as a team leader')
-            return redirect('state_detail', pk=pk)
+            if team_leader_regno in leader.leader_rollno:
+                messages.warning(request, 'This roll number is already registered as a team leader')
+                return redirect('state_detail' , pk=pk)
+            
+            if team_leader_email in leader.leader_email:
+                messages.warning(request, 'This email is already registered as a team leader')
+                return redirect('state_detail', pk=pk)
+            
+            if team_leader_contact in leader.leader_contact:
+                messages.warning(request, 'This contact number is already registered as a team leader')
+                return redirect('state_detail', pk=pk)
 
-        if len(team_name) < 5:
-            messages.warning(request, 'Team name should be atleast 5 characters')
-            return redirect('state_detail', pk=pk)
+            if len(team_name) < 5:
+                messages.warning(request, 'Team name should be atleast 5 characters')
+                return redirect('state_detail', pk=pk)
 
         application = Team(team_name=team_name, leader_name=team_leader_name, leader_email=team_leader_email, leader_contact=team_leader_contact, leader_rollno=team_leader_regno, ps=a)
 
         if application is not None:
             application.save()
             messages.success(request, 'Your team has been registered successfully')
-            send_mail(
+            maily = EmailMessage(
                 'Ideathon Registration Successful',
-                """Your team has been registered successfully for the Ideathon please proceed and your teammates and download the model ppt
-                Thank you for Shit""",
+                """
+Dear"""+application.leader_name+""",
+
+Thank you for registering for the Ideathon. We are glad to have you as a participant in this exciting event.
+
+We wanted to remind you that the Ideathon is fast approaching, and we hope you are getting excited about it! As a registered participant, you will be receiving important updates and information via email leading up to the event.
+
+We encourage you to keep a close eye on your inbox, as we will be sending updates on important dates, guidelines etc. to help you prepare for the competition.
+
+If you have any questions or concerns in the meantime, please don't hesitate to reach out to us. We are here to support you and ensure that you have the best possible experience at the Ideathon.
+
+Thank you for your participation and we look forward to seeing you soon.
+
+Best regards,
+Ré
+
+Kindly join this link and add your team mates to your team
+https://researchcell.up.railway.app/ps/team/"""+application.hashid,
                 'godsgrace2608@gmail.com',
                 [team_leader_email],)
+            
+            with open('static/pptx/sample.pptx', 'rb') as f:
+                maily.attach('sample.pptx', f.read(), 'application/vnd.openxmlformats-officedocument.presentationml.presentation')
+            
+            maily.send()
+
+            
+
        
             team_id = Team.objects.get(team_name=team_name)
             # this_id = team_id.id
@@ -397,6 +422,33 @@ def ideateamreg(request, a):
             cusreg.save()
             tid = cusreg.hashid
             messages.success(request, 'Your team has been registered successfully')
+            maily = EmailMessage(
+                'Ideathon Registration Successful',
+                """
+Dear """+cusreg.leader_name+""",
+
+Thank you for registering for the Ideathon. We are glad to have you as a participant in this exciting event.
+
+We wanted to remind you that the Ideathon is fast approaching, and we hope you are getting excited about it! As a registered participant, you will be receiving important updates and information via email leading up to the event.
+
+We encourage you to keep a close eye on your inbox, as we will be sending updates on important dates, guidelines etc. to help you prepare for the competition.
+
+If you have any questions or concerns in the meantime, please don't hesitate to reach out to us. We are here to support you and ensure that you have the best possible experience at the Ideathon.
+
+Thank you for your participation and we look forward to seeing you soon.
+
+Best regards,
+Ré
+
+Kindly join this link and add your team mates to your team
+https://researchcell.up.railway.app/ps/team/"""+cusreg.hashid,
+                'godsgrace2608@gmail.com',
+                [leader_email],)
+            
+            with open('static/pptx/sample.pptx', 'rb') as f:
+                maily.attach('sample.pptx', f.read(), 'application/vnd.openxmlformats-officedocument.presentationml.presentation')
+            
+            maily.send()
             return redirect('ideateam', tid=tid)
 
 
